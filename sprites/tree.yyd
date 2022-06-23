@@ -1,0 +1,9 @@
+|spr_empty
+|spr_ghostspawn
+|spr_wall
++Masks
+	|spr_32x32
+	|spr_dotmask
+	|spr_powerdotmask
+	|spr_ghost
+|spr_shadow

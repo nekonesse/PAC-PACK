@@ -1,0 +1,16 @@
+Derp XML 8.2
+ExtremePhysics 2.2
+Game Appearance
+Game Maker 8.2 Chunk
+Game Maker 8.2 Core
+Game Maker 8.2 DirectX8
+Game Maker 8.2 DragFile
+Game Maker 8.2 Joystick
+Game Maker 8.2 Live
+Game Maker 8.2 Network
+Game Maker 8.2 Sound
+GM Printing
+GM Room Transitions
+GM Windows Dialogs
+High Resolution Timer
+N_Menu

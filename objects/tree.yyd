@@ -1,0 +1,10 @@
+|obj_globalmanager
+|obj_ghostspawn
+|obj_ghost
++Ghosts
+	|obj_blinky
+|obj_fruit
+|obj_dot
+|obj_powerdot
+|obj_wall
+|obj_pacman
