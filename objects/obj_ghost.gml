@@ -32,7 +32,7 @@ applies_to=self
 */
 /// ghost specific start
 //blinky
-if sprite_index = spr_ghost
+if sprite_index = spr_blinky
 {
     // main
     ghost = 0 //gonna add a number for the ghost to indetify it in code, so like 0 is blinky, 1 is pinky and so on....
@@ -55,7 +55,7 @@ if sprite_index = spr_empty
     spr_right = spr_empty;
 }
 // clyde
-if sprite_index = spr_empty
+if sprite_index = spr_inky
 {
     // main
     ghost = 2

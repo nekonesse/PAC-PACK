@@ -3,6 +3,7 @@
 |obj_ghost
 +Ghosts
 	|obj_blinky
+	|obj_inky
 |obj_fruit
 |obj_dot
 |obj_powerdot
