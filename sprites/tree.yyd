@@ -1,9 +1,11 @@
 |spr_empty
 |spr_ghostspawn
 |spr_wall
++Ghosts
 +Masks
 	|spr_32x32
 	|spr_dotmask
 	|spr_powerdotmask
-	|spr_ghost
+	|spr_blinky
+	|spr_inky
 |spr_shadow
