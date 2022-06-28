@@ -99,13 +99,13 @@ action_id=603
 applies_to=self
 */
 /// ghost specific step event
-if instance_exists(obj_pacman)
+if instance_exists(instance_nearest(x,y,obj_pacman))
 {
 // blinky
 if ghost = 0
 {
-    targetx = obj_pacman.x;
-    targety = obj_pacman.y;
+    targetx = instance_nearest(x,y,obj_pacman).x;
+    targety = instance_nearest(x,y,obj_pacman).y;
 }
 
 //pinky
@@ -120,16 +120,16 @@ if ghost = 1
     ydirs[2] = 0;
     ydirs[3] = +48;
 
-    targetx = obj_pacman.x + xdirs[obj_pacman.direction/90];
-    targety = obj_pacman.y + ydirs[obj_pacman.direction/90];
+    targetx = instance_nearest(x,y,obj_pacman).x + xdirs[instance_nearest(x,y,obj_pacman).direction/90];
+    targety = instance_nearest(x,y,obj_pacman).y + ydirs[instance_nearest(x,y,obj_pacman).direction/90];
 }
 // clyde
 if ghost = 2
 {
-    targetx = obj_pacman.x;
-    targety = obj_pacman.y;
+    targetx = instance_nearest(x,y,obj_pacman).x;
+    targety = instance_nearest(x,y,obj_pacman).y;
 
-    if point_distance(x,y, obj_pacman.x,obj_pacman.y) > 96
+    if point_distance(x,y, instance_nearest(x,y,obj_pacman).x,instance_nearest(x,y,obj_pacman).y) > 96
     {
     targetx = 0;
     targety = room_height;
@@ -147,8 +147,8 @@ if ghost = 3
     ydirs[2] = 0;
     ydirs[3] = -24;
 
-    targetx = obj_pacman.x + xdirs[obj_pacman.direction/90];
-    targety = obj_pacman.y + ydirs[obj_pacman.direction/90];
+    targetx = instance_nearest(x,y,obj_pacman).x + xdirs[instance_nearest(x,y,obj_pacman).direction/90];
+    targety = instance_nearest(x,y,obj_pacman).y + ydirs[instance_nearest(x,y,obj_pacman).direction/90];
 }
 // sue
 if ghost = 4
@@ -213,8 +213,8 @@ if ghost = 5
 
     z += zspeed;
 
-    targetx = obj_pacman.x;
-    targety = obj_pacman.y;
+    targetx = instance_nearest(x,y,obj_pacman).x;
+    targety = instance_nearest(x,y,obj_pacman).y;
 }
 }
 /*"/*'/**//* YYD ACTION
