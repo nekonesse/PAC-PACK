@@ -1,7 +1,7 @@
-sprite=spr_blinky
+sprite=spr_blinkyghost
 visible=1
 solid=0
 persistent=0
 depth=0
 parent=obj_ghost
-mask=spr_blinky
+mask=spr_blinkyghost

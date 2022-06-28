@@ -2,8 +2,8 @@
 |spr_ghostspawn
 |spr_wall
 +Ghosts
-	|spr_blinky
-	|spr_inky
+	|spr_blinkyghost
+	|spr_inkyghost
 +Masks
 	|spr_32x32
 	|spr_dotmask

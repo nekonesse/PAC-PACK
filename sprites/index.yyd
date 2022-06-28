@@ -4,7 +4,7 @@ spr_wall
 spr_shadow
 spr_powerdotmask
 spr_dotmask
-spr_blinky
+spr_blinkyghost
 spr_ghostspawn
-spr_inky
+spr_inkyghost
 

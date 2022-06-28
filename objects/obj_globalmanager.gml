@@ -28,6 +28,8 @@ global.spr_player=sprite_add(working_directory+"\assets\pacman.png",0,0,0,0,0)
 global.spr_maze=sprite_add(working_directory+"\assets\maze.png",0,0,0,0,0)
 global.spr_bg=background_add(working_directory+"\assets\background.png",0,0)
 global.spr_bg=background_add(working_directory+"\assets\background.png",0,0)
+global.spr_blinky=sprite_add(working_directory+"\assets\blinky.png",0,0,0,0,0)
+global.spr_inky=sprite_add(working_directory+"\assets\inky.png",0,0,0,0,0)
 
 /*global.snd_dashpanel = sound_add_included("dashpanel.wav",0,1)
 global.snd_fruiteaten = sound_add_included("fruiteaten.wav",0,1)

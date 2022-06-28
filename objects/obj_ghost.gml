@@ -4,6 +4,59 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+/// ghost specific start
+//blinky
+if sprite_index = spr_blinkyghost
+{
+    ghost = 0
+    drawing_sprite = global.spr_blinky
+}
+// pinky
+if sprite_index = spr_empty
+{
+    // main
+    ghost = 1
+    // sprites
+}
+// clyde
+if sprite_index = spr_empty
+{
+    // main
+    ghost = 2
+    // sprites
+}
+// inky
+if sprite_index = spr_inkyghost
+{
+    // main
+    ghost = 3
+    drawing_sprite = global.spr_inky
+}
+// sue
+if sprite_index = spr_empty
+{
+    // main
+    ghost = 4
+    // specific variable
+    corner = 1;
+}
+// funky
+if sprite_index = spr_empty
+{
+    // main
+    ghost = 5
+    // jumping variables
+    /*zspeed = 0;
+    jumpspeed = -8;
+    grav = 0.6;
+    z = 0;
+    zfloor = 0;*/
+}
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
 /// spawner spawning
 spawn = 0;
 with(instance_create(x,y,obj_ghostspawn))
@@ -30,81 +83,15 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-/// ghost specific start
-//blinky
-if sprite_index = spr_blinky
-{
-    // main
-    ghost = 0 //gonna add a number for the ghost to indetify it in code, so like 0 is blinky, 1 is pinky and so on....
-    // sprites
-    spr_up = spr_ghost;
-    spr_down = spr_ghost;
-    spr_left = spr_ghost;
-    spr_right = spr_ghost;
+///Animation Values
+x_frame = 0
+y_frame = 20;
 
-}
-// pinky
-if sprite_index = spr_empty
-{
-    // main
-    ghost = 1
-    // sprites
-    spr_up = spr_empty;
-    spr_down = spr_empty;
-    spr_left = spr_empty;
-    spr_right = spr_empty;
-}
-// clyde
-if sprite_index = spr_inky
-{
-    // main
-    ghost = 2
-    // sprites
-    spr_up = spr_empty;
-    spr_down = spr_empty;
-    spr_left = spr_empty;
-    spr_right = spr_empty;
-}
-// inky
-if sprite_index = spr_empty
-{
-    // main
-    ghost = 3
-    // sprites
-    spr_up = spr_empty;
-    spr_down = spr_empty;
-    spr_left = spr_empty;
-    spr_right = spr_empty;
-}
-// sue
-if sprite_index = spr_empty
-{
-    // main
-    ghost = 4
-    spr_up = spr_empty;
-    spr_down = spr_empty;
-    spr_left = spr_empty;
-    spr_right = spr_empty;
-    // specific variable
-    corner = 1;
-}
-// funky
-if sprite_index = spr_empty
-{
-    // main
-    ghost = 5
-    // sprites
-    spr_up = spr_empty;
-    spr_down = spr_empty;
-    spr_left = spr_empty;
-    spr_right = spr_empty;
-    // specific variable
-    zspeed = 0;
-    jumpspeed = -8;
-    grav = 0.6;
-    z = 0;
-    zfloor = 0;
-}
+anim_speed = 12;
+anim_length = 4;
+
+tile_width = 32;
+tile_height = 32;
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -271,7 +258,6 @@ if direction != 270
         {
             new_direction = 90;
             distance_to_pacman = dist;
-            sprite_index = spr_up
         }
     }
 }
@@ -286,7 +272,6 @@ if direction != 0
         {
             new_direction = 180;
             distance_to_pacman = dist;
-            sprite_index = spr_left
         }
     }
 }
@@ -299,9 +284,9 @@ if direction != 180
         dist = point_distance(x+ghost_speed,y, targetx, targety);
         if dist < distance_to_pacman
         {
+            initialx_frame = 0;
             new_direction = 0;
             distance_to_pacman = dist;
-            sprite_index = spr_right
         }
     }
 }
@@ -314,11 +299,19 @@ if direction != 90
         dist = point_distance(x,y+ghost_speed, targetx, targety);
         if dist < distance_to_pacman
         {
+            initialx_frame = 12;
             new_direction = 270;
             distance_to_pacman = dist;
-            sprite_index = spr_down
         }
     }
+}
+
+switch direction
+{
+case 0: y_frame = 20 break;
+case 90: y_frame = 22 break;
+case 180: y_frame = 21 break;
+case 270: y_frame = 23 break;
 }
 
 if new_direction != -1
@@ -543,3 +536,15 @@ if instance_exists(obj_pacman)
     move_contact_solid(direction,ghost_speed)
     }
 }
+#define Draw_0
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+///Draw Sprite
+draw_sprite_part(drawing_sprite,0,floor(x_frame)*tile_width,y_frame*tile_height,tile_width,tile_height,x,y)
+
+//ANIMATE SHEET
+x_frame += anim_speed/room_speed;
+if(x_frame >= anim_length) x_frame = 0;

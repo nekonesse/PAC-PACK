@@ -40,10 +40,11 @@ applies_to=self
 */
 ///Animation Values
 
-anim_speed = 0;
+anim_speed = 12;
 anim_length = 4;
 
-x_frame = 0;
+initialx_frame = 0; //use this one instead of x_frame to set the X position of the sprite
+x_frame = initialx_frame;
 y_frame = 0;
 
 tile_width = 32;
@@ -456,6 +457,6 @@ draw_sprite_part(global.spr_player,0,floor(x_frame)*tile_width,y_frame*tile_heig
 
 //ANIMATE SHEET
 x_frame += anim_speed/room_speed;
-if(x_frame >= anim_length) x_frame = 0;
+if(x_frame >= anim_length) x_frame = initialx_frame;
 
-draw_rectangle(x+boxx1,y+boxy1,x+boxx2,y+boxy2,true)
+//draw_rectangle(x+boxx1,y+boxy1,x+boxx2,y+boxy2,true)
