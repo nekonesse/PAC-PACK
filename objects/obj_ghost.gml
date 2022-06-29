@@ -138,17 +138,30 @@ if ghost = 2
 // inky
 if ghost = 3
 {
-    xdirs[0] = -24;
-    xdirs[1] = +24;
-    xdirs[2] = +24;
+    xdirs[0] = +32;
+    xdirs[1] = 0//-48;
+    xdirs[2] = -32;
     xdirs[3] = 0;
     ydirs[0] = 0;
-    ydirs[1] = +24;
+    ydirs[1] = -32;
     ydirs[2] = 0;
-    ydirs[3] = -24;
+    ydirs[3] = +32;
 
+    //temp fix for AI
     targetx = instance_nearest(x,y,obj_pacman).x + xdirs[instance_nearest(x,y,obj_pacman).direction/90];
     targety = instance_nearest(x,y,obj_pacman).y + ydirs[instance_nearest(x,y,obj_pacman).direction/90];
+
+    //i fuckin hate this piece of shit code
+    /*if instance_exists(obj_blinky)
+    {
+    targetx = x + lengthdir_x(point_distance(obj_pacman.x,obj_pacman.y,obj_blinky.x,obj_blinky.y),point_direction(obj_pacman.x,obj_pacman.y,obj_blinky.x,obj_blinky.y)-180)
+    targety = y + lengthdir_x(point_distance(obj_pacman.x,obj_pacman.y,obj_blinky.x,obj_blinky.y),point_direction(obj_pacman.x,obj_pacman.y,obj_blinky.x,obj_blinky.y))
+    }
+    else
+    {
+    targetx = instance_nearest(x,y,obj_pacman).x + xdirs[instance_nearest(x,y,obj_pacman).direction/90];
+    targety = instance_nearest(x,y,obj_pacman).y + ydirs[instance_nearest(x,y,obj_pacman).direction/90];
+    }*/
 }
 // sue
 if ghost = 4
@@ -543,8 +556,10 @@ action_id=603
 applies_to=self
 */
 ///Draw Sprite
-draw_sprite_part(drawing_sprite,0,floor(x_frame)*tile_width,y_frame*tile_height,tile_width,tile_height,x,y)
+draw_sprite_part(drawing_sprite,0,floor(x_frame)*tile_width,y_frame*tile_height,tile_width,tile_height,x-16,y-16)
 
 //ANIMATE SHEET
 x_frame += anim_speed/room_speed;
 if(x_frame >= anim_length) x_frame = 0;
+
+draw_line(x,y,targetx,targety)

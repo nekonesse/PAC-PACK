@@ -30,8 +30,6 @@ pm_speed = pm_defaultsp;
 //bugfixing
 immune = false;
 
-sprite_index = global.spr_player
-
 state = "spawn"
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -453,7 +451,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-draw_sprite_part(global.spr_player,0,floor(x_frame)*tile_width,y_frame*tile_height,tile_width,tile_height,x,y)
+draw_sprite_part(global.spr_player,0,floor(x_frame)*tile_width,y_frame*tile_height,tile_width,tile_height,x-16,y-16)
 
 //ANIMATE SHEET
 x_frame += anim_speed/room_speed;
