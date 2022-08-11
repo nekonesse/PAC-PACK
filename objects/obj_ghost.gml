@@ -12,18 +12,17 @@ if sprite_index = spr_blinkyghost
     drawing_sprite = global.spr_blinky
 }
 // pinky
-if sprite_index = spr_empty
+if sprite_index = spr_pinkyghost
 {
     // main
     ghost = 1
-    // sprites
+    drawing_sprite = global.spr_pinky
 }
 // clyde
 if sprite_index = spr_empty
 {
     // main
     ghost = 2
-    // sprites
 }
 // inky
 if sprite_index = spr_inkyghost
@@ -147,21 +146,16 @@ if ghost = 3
     ydirs[2] = 0;
     ydirs[3] = +32;
 
-    //temp fix for AI
-    targetx = instance_nearest(x,y,obj_pacman).x + xdirs[instance_nearest(x,y,obj_pacman).direction/90];
-    targety = instance_nearest(x,y,obj_pacman).y + ydirs[instance_nearest(x,y,obj_pacman).direction/90];
-
-    //i fuckin hate this piece of shit code
-    /*if instance_exists(obj_blinky)
+    if instance_exists(obj_blinky)
     {
-    targetx = x + lengthdir_x(point_distance(obj_pacman.x,obj_pacman.y,obj_blinky.x,obj_blinky.y),point_direction(obj_pacman.x,obj_pacman.y,obj_blinky.x,obj_blinky.y)-180)
-    targety = y + lengthdir_x(point_distance(obj_pacman.x,obj_pacman.y,obj_blinky.x,obj_blinky.y),point_direction(obj_pacman.x,obj_pacman.y,obj_blinky.x,obj_blinky.y))
+    targetx = 2 * obj_pacman.x - obj_blinky.x;
+    targety = 2 * obj_pacman.y - obj_blinky.y;
     }
     else
     {
     targetx = instance_nearest(x,y,obj_pacman).x + xdirs[instance_nearest(x,y,obj_pacman).direction/90];
     targety = instance_nearest(x,y,obj_pacman).y + ydirs[instance_nearest(x,y,obj_pacman).direction/90];
-    }*/
+    }
 }
 // sue
 if ghost = 4
