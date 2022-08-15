@@ -442,14 +442,13 @@ if instance_exists(obj_pacman)
     if new_direction != -1
     {
         direction = new_direction
-        if direction = top
-        sprite_index = spr_scaredghostup;
-        if direction = down
-        sprite_index = spr_scaredghostdown;
-        if direction = right
-        sprite_index = spr_scaredghostright;
-        if direction = left
-        sprite_index = spr_scaredghostleft;
+    switch direction
+    {
+    case 0: y_frame = 12 break;
+    case 90: y_frame = 14 break;
+    case 180: y_frame = 13 break;
+    case 270: y_frame = 15 break;
+    }
     }
 
     move_contact_solid(direction,ghost_speed)
@@ -486,7 +485,6 @@ if instance_exists(obj_pacman)
             {
                 new_direction = 90;
                 distance_to_pacman = dist;
-                sprite_index = spr_ghosteatenup
             }
         }
     }
@@ -501,7 +499,6 @@ if instance_exists(obj_pacman)
             {
                 new_direction = 180;
                 distance_to_pacman = dist;
-                sprite_index = spr_ghosteatenleft
             }
         }
     }
@@ -516,7 +513,6 @@ if instance_exists(obj_pacman)
             {
                 new_direction = 0;
                 distance_to_pacman = dist;
-                sprite_index = spr_ghosteatenright
             }
         }
     }
@@ -531,7 +527,6 @@ if instance_exists(obj_pacman)
             {
                 new_direction = 270;
                 distance_to_pacman = dist;
-                sprite_index = spr_ghosteatendown
             }
         }
     }
