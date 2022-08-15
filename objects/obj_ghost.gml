@@ -231,6 +231,9 @@ action_id=603
 applies_to=self
 */
 /// All ghost state normal
+
+//welcome to confused code palace
+
 if instance_exists(obj_pacman)
 {
 
