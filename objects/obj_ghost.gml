@@ -5,6 +5,7 @@ action_id=603
 applies_to=self
 */
 /// ghost specific start
+alarm[0] = 60
 //blinky
 if sprite_index = spr_blinkyghost
 {
@@ -77,6 +78,10 @@ image_speed = 1;
 ghost_speed = 2;
 direction = 180;
 
+//change how fast the flashing is when about to turn back to normal
+flash_time = 120;
+interval = 24
+
 state = "normal"
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -86,6 +91,8 @@ applies_to=self
 ///Animation Values
 x_frame = 0
 y_frame = 20;
+y_frameoffset = 0;
+final_y_frame = y_frame + y_frameoffset;
 
 anim_speed = 12;
 anim_length = 4;
@@ -231,6 +238,7 @@ action_id=603
 applies_to=self
 */
 /// All ghost state normal
+final_y_frame = y_frame + y_frameoffset;
 
 //welcome to confused code palace
 
@@ -244,6 +252,9 @@ immune = false
 
 if state == "normal"
 {
+flash_time = 120;
+y_frameoffset = 0;
+
 if global.scared = true && immune = false
 {
 state = "scared";
@@ -356,6 +367,12 @@ if instance_exists(obj_pacman)
     move_wrap(true,true,8)
 
     depth = -y;
+
+    if obj_globalmanager.timerscared < 120
+    {
+    flash_time -= 1
+    }
+
     // new scared code
     right = -1;
     left = -1;
@@ -447,6 +464,7 @@ if instance_exists(obj_pacman)
         direction = new_direction
     switch direction
     {
+
     case 0: y_frame = 12 break;
     case 90: y_frame = 14 break;
     case 180: y_frame = 13 break;
@@ -454,8 +472,16 @@ if instance_exists(obj_pacman)
     }
     }
 
-    move_contact_solid(direction,ghost_speed)
+    if (flash_time mod interval) <= interval/2
+    {
+    y_frameoffset = 0
+    }
+    else
+    {
+    y_frameoffset = 4
+    }
 
+    move_contact_solid(direction,ghost_speed)
 
     // state eaten
     }
@@ -549,7 +575,7 @@ action_id=603
 applies_to=self
 */
 ///Draw Sprite
-draw_sprite_part(drawing_sprite,0,floor(x_frame)*tile_width,y_frame*tile_height,tile_width,tile_height,x-16,y-16)
+draw_sprite_part(drawing_sprite,0,floor(x_frame)*tile_width,final_y_frame*tile_height,tile_width,tile_height,x-16,y-16)
 
 //ANIMATE SHEET
 x_frame += anim_speed/room_speed;

@@ -11,7 +11,7 @@ global.lifes = 3;
 
 global.scared = false
 
-timerscared = 300
+timerscared = 360
 
 //Options
 scoretext = false;
