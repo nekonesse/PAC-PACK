@@ -5,10 +5,10 @@ action_id=603
 applies_to=self
 */
 //please dont mess with this its for the collision box
-boxx1 = 10
-boxy1 = 10
-boxx2 = 21
-boxy2 = 21
+boxx1 = -8
+boxy1 = -8
+boxx2 = 8
+boxy2 = 8
 //jumping stuff
 zspeed = 0;
 jumpspeed = -8;
@@ -133,15 +133,19 @@ exit
  insp = collision_rectangle(x+boxx1,y+boxy1,x+boxx2,y+boxy2, obj_dot, false, false);
 if insp != noone && z > -4
 {
-    //vvvvvv remove these comments if you want the pellets to spawn a score under it after its eaten vvvvv
-    /*insscore = instance_create(x,y,obj_scoreindicator)
+    if obj_globalmanager.scoretext = true
+    {
+    insscore = instance_create(x,y,obj_scoreindicator)
     if insscore != noone
     {
         with(insscore)
         {
             drawscore = 10
         }
-    }*/
+    }
+    }
+
+
     global.points += 10
     global.lifepoints += 10
     with(insp)
@@ -457,4 +461,4 @@ draw_sprite_part(global.spr_player,0,floor(x_frame)*tile_width,y_frame*tile_heig
 x_frame += anim_speed/room_speed;
 if(x_frame >= anim_length) x_frame = initialx_frame;
 
-//draw_rectangle(x+boxx1,y+boxy1,x+boxx2,y+boxy2,true)
+draw_rectangle(x+boxx1,y+boxy1,x+boxx2,y+boxy2,true)

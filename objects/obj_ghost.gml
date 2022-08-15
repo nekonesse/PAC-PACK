@@ -19,10 +19,11 @@ if sprite_index = spr_pinkyghost
     drawing_sprite = global.spr_pinky
 }
 // clyde
-if sprite_index = spr_empty
+if sprite_index = spr_clydeghost
 {
     // main
     ghost = 2
+    drawing_sprite = global.spr_clyde
 }
 // inky
 if sprite_index = spr_inkyghost
@@ -98,7 +99,7 @@ action_id=603
 applies_to=self
 */
 /// ghost specific step event
-if instance_exists(instance_nearest(x,y,obj_pacman))
+if instance_exists(obj_pacman)
 {
 // blinky
 if ghost = 0
