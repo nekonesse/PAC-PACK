@@ -455,10 +455,12 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+//ANIMATE SHEET
 draw_sprite_part(global.spr_player,0,floor(x_frame)*tile_width,y_frame*tile_height,tile_width,tile_height,x-16,y-16)
 
-//ANIMATE SHEET
 x_frame += anim_speed/room_speed;
 if(x_frame >= anim_length) x_frame = initialx_frame;
+
+draw_text(x,y-32,obj_globalmanager.timerscared)
 
 draw_rectangle(x+boxx1,y+boxy1,x+boxx2,y+boxy2,true)

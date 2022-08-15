@@ -65,6 +65,21 @@ y_frame = 0;
 
 tile_width = 1;
 tile_height = 1;
+#define Step_0
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+if global.scared == true && timerscared > 0
+{
+timerscared -= 1
+}
+
+if timerscared < 1
+{
+global.scared = false;
+}
 #define Draw_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
