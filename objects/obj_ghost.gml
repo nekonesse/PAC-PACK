@@ -58,12 +58,6 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-/// spawner spawning
-spawn = 0;
-with(instance_create(x,y,obj_ghostspawn))
-{
-    other.spawn = id;
-}
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
@@ -245,7 +239,7 @@ final_y_frame = y_frame + y_frameoffset;
 if instance_exists(obj_pacman)
 {
 
-if obj_globalmanager.timerscared > 595
+if obj_globalmanager.timerscared > 355
 {
 immune = false
 }
@@ -258,7 +252,7 @@ y_frameoffset = 0;
 if global.scared = true && immune = false
 {
 state = "scared";
-direction *= -1;
+/*Flip Direction*/ direction *= -1;
 exit;
 }
 
@@ -354,9 +348,7 @@ if instance_exists(obj_pacman)
 {
     if state == "scared"
     {
-    randomize();
     ghost_speed = 1;
-    new_direction = -1;
     distance_to_pacman = 9999999;
 
     if global.scared == false
@@ -388,76 +380,6 @@ if instance_exists(obj_pacman)
     top = 90;
 
     new_direction = choose(right,left,top,down)
-
-    // old scared code
-    /*var dx = choose(24,80,72,204,152,208,144);
-    var dy = choose(274,160,104,40,80,272,216);
-
-    if point_distance(x,y, obj_pacman.x,obj_pacman.y) < 64
-    {
-    dx = choose(24,80,72,204,152,208,144);
-    dy = choose(274,160,104,40,80,272,216);
-    }
-
-    //UP
-    if direction != 270
-    {
-        if place_meeting(x,y-2, obj_wall) == false
-        {
-            var dist = point_distance(x,y-8, dx, dy);
-            if dist < distance_to_pacman
-            {
-                new_direction = 90;
-                distance_to_pacman = dist;
-                sprite_index = spr_scaredghostup
-            }
-        }
-    }
-
-    //LEFT
-    if direction != 0
-    {
-        if place_meeting(x-2,y, obj_wall) == false
-        {
-            var dist = point_distance(x-8,y, dx, dy);
-            if dist < distance_to_pacman
-            {
-                new_direction = 180;
-                distance_to_pacman = dist;
-                sprite_index = spr_scaredghostleft
-            }
-        }
-    }
-
-    //RIGHT
-    if direction != 180
-    {
-        if place_meeting(x+2,y, obj_wall) == false
-        {
-            var dist = point_distance(x+8,y, dx, dy);
-            if dist < distance_to_pacman
-            {
-                new_direction = 0;
-                distance_to_pacman = dist;
-                sprite_index = spr_scaredghostright
-            }
-        }
-    }
-
-    //DOWN
-    if direction != 90
-    {
-        if place_meeting(x,y+2, obj_wall) == false
-        {
-            var dist = point_distance(x,y+8, dx, dy);
-            if dist < distance_to_pacman
-            {
-                new_direction = 270;
-                distance_to_pacman = dist;
-                sprite_index = spr_scaredghostdown
-            }
-        }
-    }*/
 
     if new_direction != -1
     {
