@@ -79,14 +79,10 @@ pm_speed = pm_defaultsp
 timer1 = timer1def
 }
 
-if pm_speed != 0
-{
-anim_speed = pm_speed * 8
-}
-else
-{
-anim_speed = 1
-}
+//if vspeed && hspeed = 0;
+//{
+//anim_speed = 0
+//}
 
 move_wrap(true,true,16)
 
@@ -453,6 +449,32 @@ if keyboard_check_pressed(ord('X'))
         immune = true;
     }
 }
+#define Step_2
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+if state == "normal"
+{
+
+if pm_speed != 0
+{
+if x == xprevious && y == yprevious
+{
+anim_speed = 0
+}
+else
+{
+anim_speed = pm_speed * 8
+}
+}
+else if pm_speed = 0
+{
+anim_speed = 0
+}
+
+}
 #define Draw_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -465,6 +487,6 @@ draw_sprite_part(global.spr_player,0,floor(x_frame)*tile_width,final_y_frame*til
 x_frame += anim_speed/room_speed;
 if(x_frame >= anim_length) x_frame = initialx_frame;
 
-draw_text(x,y-32,obj_globalmanager.timerscared)
+draw_text(x,y-32,speed)
 
 draw_rectangle(x+boxx1,y+boxy1,x+boxx2,y+boxy2,true)
