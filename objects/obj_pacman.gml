@@ -435,7 +435,6 @@ if pm_speed != 0
 if x == xprevious && y == yprevious
 {
 anim_speed = 0
-x_frame = 0
 }
 else
 {
@@ -445,7 +444,6 @@ anim_speed = pm_speed * 8
 else if pm_speed = 0
 {
 anim_speed = 0
-x_frame = 0
 }
 
 }
