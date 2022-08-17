@@ -55,6 +55,8 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+///Controller
+
 if state == "normal"
 {
 final_y_frame = y_frame + y_frameoffset;
@@ -455,6 +457,8 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+///Animation Stop
+
 if state == "normal"
 {
 
@@ -463,6 +467,7 @@ if pm_speed != 0
 if x == xprevious && y == yprevious
 {
 anim_speed = 0
+x_frame = 0
 }
 else
 {
@@ -472,6 +477,7 @@ anim_speed = pm_speed * 8
 else if pm_speed = 0
 {
 anim_speed = 0
+x_frame = 0
 }
 
 }

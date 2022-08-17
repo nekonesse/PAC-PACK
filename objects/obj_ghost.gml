@@ -235,7 +235,7 @@ applies_to=self
 final_y_frame = y_frame + y_frameoffset;
 
 //welcome to confused code palace
-
+/*
 if instance_exists(obj_pacman)
 {
 
@@ -252,10 +252,10 @@ y_frameoffset = 0;
 if global.scared = true && immune = false
 {
 state = "scared";
-/*Flip Direction*/ direction *= -1;
+/*Flip Direction direction *= -1;
 exit;
 }
-
+/*
 ghost_speed = 2;
 new_direction = -1;
 distance_to_pacman = 99999;
