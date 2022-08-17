@@ -9,12 +9,6 @@ boxx1 = -8
 boxy1 = -8
 boxx2 = 8
 boxy2 = 8
-//jumping stuff
-zspeed = 0;
-jumpspeed = -8;
-grav = 0.4;
-z = 0;
-zfloor = 0;
 //timer stuff i dont remember you can just look in the code
 timer1def = 120
 timer1 = timer1def
@@ -55,7 +49,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-///Controller
+///Main Controller
 
 if state == "normal"
 {
@@ -65,8 +59,6 @@ jump = keyboard_check_pressed(vk_space);
 
 pm_speed = pm_defaultsp;
 clamp(timer1, 0, timer1def)
-clamp(z,0,9999)
-clamp(zspeed,0,9999)
 
 timerwait = 60;
 timerrespawn = 60;
@@ -81,36 +73,12 @@ pm_speed = pm_defaultsp
 timer1 = timer1def
 }
 
-//if vspeed && hspeed = 0;
-//{
-//anim_speed = 0
-//}
-
 move_wrap(true,true,16)
 
 depth = -y;
 
-//jumping
-if (jump && zspeed == 0)
-{
-    zspeed = jumpspeed;
-}
-
-if (z != zfloor)
-{
-zspeed += grav
-}
-
-if (z + zspeed > zfloor)
-{
-zspeed = 0;
-z = zfloor
-}
-
-z += zspeed;
-
 ins = collision_rectangle(x+boxx1,y+boxy1,x+boxx2,y+boxy2, obj_powerdot, false, false);
-if ins != noone && z > -4
+if ins != noone
 {
     global.points += 50
     global.lifepoints += 50
@@ -133,7 +101,7 @@ exit
 }
 
  insp = collision_rectangle(x+boxx1,y+boxy1,x+boxx2,y+boxy2, obj_dot, false, false);
-if insp != noone && z > -4
+if insp != noone
 {
     if obj_globalmanager.scoretext = true
     {
@@ -180,7 +148,7 @@ exit
 
 /*
  ins2 = collision_rectangle(x-boxx1,y-boxy1,x+boxx2,y+boxy2, obj_dashpanel, false, false);
-if ins2 != noone && z = 0
+if ins2 != noone
 {
 pm_defaultsp = 4
 timer1 = timer1def
@@ -188,7 +156,7 @@ timer1 = timer1def
 
 // colisions
  col_ghost = collision_rectangle(x-boxx1,y-boxy1,x+boxx2,y+boxy2, obj_ghost, false, false);
-if col_ghost != noone && z > -16
+if col_ghost != noone
 {
 if col_ghost.state == states.scared
 {
