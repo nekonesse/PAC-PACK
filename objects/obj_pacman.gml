@@ -82,7 +82,7 @@ if ins != noone
 {
     global.points += 50
     global.lifepoints += 50
-    //vvvvvv remove these comments if you want the power pellets to spawn a score under it after its eaten vvvvv
+    //vvvvvv Hi There! Remove these comments if you want the power pellets to spawn a score under it after its eaten vvvvv
     /*insscore = instance_create(x,y,obj_scoreindicator)
     if insscore != noone
     {
@@ -152,173 +152,40 @@ if ins2 != noone
 {
 pm_defaultsp = 4
 timer1 = timer1def
-}
+}*/
 
-// colisions
+// collisions
  col_ghost = collision_rectangle(x-boxx1,y-boxy1,x+boxx2,y+boxy2, obj_ghost, false, false);
 if col_ghost != noone
 {
-if col_ghost.state == states.scared
+if col_ghost.state == "scared"
 {
 global.points += 200
 global.lifepoints += 200
- insscore = instance_create(x,y,obj_scoreindicator)
-    if insscore != noone
+ //insscore = instance_create(x,y,obj_scoreindicator)
+    /*if insscore != noone
     {
         with(insscore)
         {
             drawscore = 200
         }
-    }
+    }*/
 with(col_ghost)
 {
-state = states.eaten
+state = "eaten"
 }
 }
-else if col_ghost.state == states.normal && !immune
+else if col_ghost.state == "normal" && !immune
 {
 player_die();
 exit;
 }
 }
 
-/*
- inspinky = collision_rectangle(x-boxx1,y-boxy1,x+boxx2,y+boxy2, obj_pinky, false, false);
-if inspinky != noone && z > -16
-{
-if inspinky.state == pinkystates.scared
-{
-(snd_ghosteat,101,false)
-global.points += 200
-global.lifepoints += 200
- insscore = instance_create(x,y,obj_scoreindicator)
-    if insscore != noone
-    {
-        with(insscore)
-        {
-            drawscore = 200
-        }
-    }
-with(inspinky)
-{
-state = pinkystates.eaten
-}
-}
-else if inspinky.state == pinkystates.normal && !immune
-{
-player_die();
-exit;
-}
-}
-
- insclyde = collision_rectangle(x-boxx1,y-boxy1,x+boxx2,y+boxy2, obj_clyde, false, false);
-if insclyde != noone && z > -16
-if insclyde.state == clydestates.scared
-{
-(snd_ghosteat,101,false)
-global.points += 200
-global.lifepoints += 200
- insscore = instance_create(x,y,obj_scoreindicator)
-    if insscore != noone
-    {
-        with(insscore)
-        {
-            drawscore = 200
-        }
-    }
-with(insclyde)
-{
-state = clydestates.eaten
-}
-}
-else if insclyde.state == clydestates.normal && !immune
-{
-player_die();
-exit;
-}
-
- insinky = collision_rectangle(x-boxx1,y-boxy1,x+boxx2,y+boxy2, obj_inky, false, false);
-if insinky != noone && z > -16
-if insinky.state == inkystates.scared
-{
-(snd_ghosteat,101,false)
-global.points += 200
-global.lifepoints += 200
- insscore = instance_create(x,y,obj_scoreindicator)
-    if insscore != noone
-    {
-        with(insscore)
-        {
-            drawscore = 200
-        }
-    }
-with(insinky)
-{
-state = inkystates.eaten
-}
-}
-else if insinky.state == inkystates.normal && !immune
-{
-player_die();
-exit;
-}
-
- inssue = collision_rectangle(x-boxx1,y-boxy1,x+boxx2,y+boxy2, obj_sue, false, false);
-if inssue != noone && z > -16
-if inssue.state == suestates.scared
-{
-(snd_ghosteat,101,false)
-global.points += 200
-global.lifepoints += 200
- insscore = instance_create(x,y,obj_scoreindicator)
-    if insscore != noone
-    {
-        with(insscore)
-        {
-            drawscore = 200
-        }
-    }
-with(inssue)
-{
-state = suestates.eaten
-}
-}
-else if inssue.state == suestates.normal && !immune
-{
-player_die();
-exit;
-}
-
- insfunky = collision_rectangle(x-boxx1,y-boxy1,x+boxx2,y+boxy2, obj_funky, false, false);
-if insfunky != noone && z > insfunky.z-16
-if insfunky.state == funkystates.scared
-{
-(snd_ghosteat,101,false)
-global.points += 200
-global.lifepoints += 200
- insscore = instance_create(x,y,obj_scoreindicator)
-    if insscore != noone
-    {
-        with(insscore)
-        {
-            drawscore = 200
-        }
-    }
-with(insfunky)
-{
-state = funkystates.eaten
-}
-}
-else if insfunky.state == funkystates.normal && !immune
-{
-player_die();
-exit;
-}
-*/
 // keyboard checks
 if keyboard_check(vk_left) == true
 {
-if place_meeting(x-4,y, obj_wall) == false
+if !place_meeting(x-4,y, obj_wall) && !place_meeting(x-4,y, obj_ghostwall)
 {
 direction = 180;
 y_frame = 1
@@ -327,7 +194,7 @@ y_frame = 1
 
 if keyboard_check(vk_right) == true
 {
-if place_meeting(x+4,y, obj_wall) == false
+if !place_meeting(x+4,y, obj_wall) && !place_meeting(x+4,y, obj_ghostwall)
 {
 direction = 0;
 y_frame = 0
@@ -336,7 +203,7 @@ y_frame = 0
 
 if keyboard_check(vk_up) == true
 {
-if place_meeting(x,y-4, obj_wall) == false
+if !place_meeting(x,y-4, obj_wall) && !place_meeting(x,y-4, obj_ghostwall)
 {
 direction = 90;
 y_frame = 2
@@ -345,7 +212,7 @@ y_frame = 2
 
 if keyboard_check(vk_down) == true
 {
-if place_meeting(x,y+4, obj_wall) == false
+if !place_meeting(x,y+4, obj_wall) && !place_meeting(x,y+4, obj_ghostwall)
 {
 direction = 270;
 y_frame = 3
@@ -459,6 +326,6 @@ draw_sprite_part(global.spr_player,0,floor(x_frame)*tile_width,final_y_frame*til
 x_frame += anim_speed/room_speed;
 if(x_frame >= anim_length) x_frame = initialx_frame;
 
-draw_text(x,y-32,speed)
+/*draw_text(x,y-32,speed)
 
 draw_rectangle(x+boxx1,y+boxy1,x+boxx2,y+boxy2,true)

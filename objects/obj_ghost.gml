@@ -58,11 +58,6 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
 /// default variables for all ghosts
 targetx = 0;
 targety = 0;
@@ -71,6 +66,7 @@ immune = false;
 image_speed = 1;
 ghost_speed = 2;
 direction = 180;
+spawn = instance_create(x,y,obj_ghostspawn)
 
 //change how fast the flashing is when about to turn back to normal
 flash_time = 120;
@@ -239,6 +235,7 @@ final_y_frame = y_frame + y_frameoffset;
 if instance_exists(obj_pacman)
 {
 
+//immune prevents ghosts from becoming scared mode again after being eaten
 if obj_globalmanager.timerscared > 355
 {
 immune = false
@@ -248,14 +245,6 @@ if state == "normal"
 {
 flash_time = 120;
 y_frameoffset = 0;
-
-if global.scared = true && immune = false
-{
-state = "scared";
-/*Flip Direction*/ direction *= -1;
-exit;
-}
-
 ghost_speed = 2;
 new_direction = -1;
 distance_to_pacman = 99999;
@@ -344,6 +333,17 @@ action_id=603
 applies_to=self
 */
 /// all ghost scared and dead step event
+
+if state == "normal"
+{
+if global.scared = true && immune = false
+{
+state = "scared";
+/*Flip Direction*/ direction *= -1;
+exit;
+}
+}
+
 if instance_exists(obj_pacman)
 {
     if state == "scared"
@@ -383,14 +383,13 @@ if instance_exists(obj_pacman)
 
     if new_direction != -1
     {
-        direction = new_direction
+    direction = new_direction
     switch direction
     {
-
-    case 0: y_frame = 12 break;
-    case 90: y_frame = 14 break;
-    case 180: y_frame = 13 break;
-    case 270: y_frame = 15 break;
+    case 0: y_frame = 12 break; //Right
+    case 90: y_frame = 14 break; //Up
+    case 180: y_frame = 13 break;//Left
+    case 270: y_frame = 15 break; //Down
     }
     }
 
@@ -410,6 +409,7 @@ if instance_exists(obj_pacman)
     else if state == "eaten"
     {
 
+    ghost_speed = 4;
     new_direction = -1;
     distance_to_pacman = 9999999;
 
@@ -420,7 +420,7 @@ if instance_exists(obj_pacman)
     dx = spawn.x;
     dy = spawn.y;
 
-    if instance_position(x,y,obj_ghostspawn)
+    if x = dx && y = dy
     {
     immune = true
     state = "normal"
@@ -485,6 +485,13 @@ if instance_exists(obj_pacman)
     if new_direction != -1
     {
     direction = new_direction
+    switch direction
+    {
+    case 0: y_frame = 24 break; //Right
+    case 90: y_frame = 26 break; //Up
+    case 180: y_frame = 25 break;//Left
+    case 270: y_frame = 27 break; //Down
+    }
     }
 
     move_contact_solid(direction,ghost_speed)
@@ -503,4 +510,6 @@ draw_sprite_part(drawing_sprite,0,floor(x_frame)*tile_width,final_y_frame*tile_h
 x_frame += anim_speed/room_speed;
 if(x_frame >= anim_length) x_frame = 0;
 
-draw_line(x,y,targetx,targety)
+//debug stuff
+//draw_line(x,y,targetx,targety)
+draw_text(x,y-32,immune)

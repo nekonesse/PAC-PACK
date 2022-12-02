@@ -10,5 +10,6 @@
 |obj_dot
 |obj_powerdot
 |obj_wall
+|obj_ghostwall
 |obj_pacman
 |object13

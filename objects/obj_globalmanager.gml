@@ -19,6 +19,7 @@ scoretext = false;
 //Loading Resources
 global.spr_player=sprite_add(working_directory+"\assets\pacman.png",0,0,0,0,0)
 global.spr_maze=sprite_add(working_directory+"\assets\maze.png",0,0,0,0,0)
+global.spr_mazeobject=sprite_add(working_directory+"\assets\mazeobjects.png",0,0,0,0,0)
 global.spr_bg=background_add(working_directory+"\assets\background.png",0,0)
 global.spr_blinky=sprite_add(working_directory+"\assets\blinky.png",0,0,0,0,0)
 global.spr_inky=sprite_add(working_directory+"\assets\inky.png",0,0,0,0,0)
