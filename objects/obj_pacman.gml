@@ -4,11 +4,9 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-//please dont mess with this its for the collision box
-boxx1 = -8
-boxy1 = -8
-boxx2 = 8
-boxy2 = 8
+//Collision box size
+boxx = 4
+boxy = 4
 //timer stuff i dont remember you can just look in the code
 timer1def = 120
 timer1 = timer1def
@@ -82,6 +80,7 @@ if ins != noone
 {
     global.points += 50
     global.lifepoints += 50
+    if instance_exists(obj_ghost) with(obj_ghost){if state == "normal" immune=0 flash_time=120 y_frameoffset=0}
     //vvvvvv Hi There! Remove these comments if you want the power pellets to spawn a score under it after its eaten vvvvv
     /*insscore = instance_create(x,y,obj_scoreindicator)
     if insscore != noone
@@ -103,30 +102,31 @@ exit
  insp = collision_rectangle(x+boxx1,y+boxy1,x+boxx2,y+boxy2, obj_dot, false, false);
 if insp != noone
 {
+    with(insp)
+    {
+        instance_destroy()
+    }
+
     if obj_globalmanager.scoretext = true
     {
-    insscore = instance_create(x,y,obj_scoreindicator)
-    if insscore != noone
-    {
-        with(insscore)
+        insscore = instance_create(x,y,obj_scoreindicator)
+        if insscore != noone
         {
-            drawscore = 10
+            with(insscore)
+            {
+                drawscore = 10
+            }
         }
-    }
     }
 
 
     global.points += 10
     global.lifepoints += 10
-    with(insp)
-    {
-    instance_destroy()
-    }
 exit
 }
 
 
-/* insfruit = collision_rectangle(x-boxx1,y-boxy1,x+boxx2,y+boxy2, obj_fruit, false, false);
+insfruit = collision_rectangle(x-boxx1,y-boxy1,x+boxx2,y+boxy2, obj_fruit, false, false);
 if insfruit != noone && z > -4 && insfruit.sprite_index != spr_empty
 {
      insscore = instance_create(obj_fruit.x,obj_fruit.y,obj_scoreindicator)
@@ -146,6 +146,30 @@ if insfruit != noone && z > -4 && insfruit.sprite_index != spr_empty
 exit
 }
 
+col_ghost = instance_position(x,y,obj_ghost)
+if col_ghost != noone
+{
+    if col_ghost.state == "scared"
+    {
+        global.points += 200
+        global.lifepoints += 200
+        //insscore = instance_create(x,y,obj_scoreindicator)
+        /*if insscore != noone
+        {
+        with(insscore)
+        {
+        drawscore = 200
+        }
+        }*/
+        col_ghost.state = "eaten"
+        exit;
+    }
+    else if col_ghost.state == "normal"
+    {
+        player_die(id);
+    }
+}
+
 /*
  ins2 = collision_rectangle(x-boxx1,y-boxy1,x+boxx2,y+boxy2, obj_dashpanel, false, false);
 if ins2 != noone
@@ -154,73 +178,44 @@ pm_defaultsp = 4
 timer1 = timer1def
 }*/
 
-// collisions
- col_ghost = collision_rectangle(x-boxx1,y-boxy1,x+boxx2,y+boxy2, obj_ghost, false, false);
-if col_ghost != noone
-{
-if col_ghost.state == "scared"
-{
-global.points += 200
-global.lifepoints += 200
- //insscore = instance_create(x,y,obj_scoreindicator)
-    /*if insscore != noone
-    {
-        with(insscore)
-        {
-            drawscore = 200
-        }
-    }*/
-with(col_ghost)
-{
-state = "eaten"
-}
-}
-else if col_ghost.state == "normal" && !immune
-{
-player_die();
-exit;
-}
-}
-
 // keyboard checks
-if keyboard_check(vk_left) == true
+if keyboard_check(vk_left)
 {
-if !place_meeting(x-4,y, obj_wall) && !place_meeting(x-4,y, obj_ghostwall)
-{
-direction = 180;
-y_frame = 1
-}
-}
-
-if keyboard_check(vk_right) == true
-{
-if !place_meeting(x+4,y, obj_wall) && !place_meeting(x+4,y, obj_ghostwall)
-{
-direction = 0;
-y_frame = 0
-}
+    if !place_meeting(x-4,y, obj_wall) && !place_meeting(x-4,y, obj_ghostwall)
+    {
+        direction = 180;
+        y_frame = 1
+    }
 }
 
-if keyboard_check(vk_up) == true
+if keyboard_check(vk_right)
 {
-if !place_meeting(x,y-4, obj_wall) && !place_meeting(x,y-4, obj_ghostwall)
-{
-direction = 90;
-y_frame = 2
-}
+    if !place_meeting(x+4,y, obj_wall) && !place_meeting(x+4,y, obj_ghostwall)
+    {
+        direction = 0;
+        y_frame = 0
+    }
 }
 
-if keyboard_check(vk_down) == true
+if keyboard_check(vk_up)
 {
-if !place_meeting(x,y+4, obj_wall) && !place_meeting(x,y+4, obj_ghostwall)
-{
-direction = 270;
-y_frame = 3
+    if !place_meeting(x,y-4, obj_wall) && !place_meeting(x,y-4, obj_ghostwall)
+    {
+        direction = 90;
+        y_frame = 2
+    }
 }
+
+if keyboard_check(vk_down)
+{
+    if !place_meeting(x,y+4, obj_wall) && !place_meeting(x,y+4, obj_ghostwall)
+    {
+        direction = 270;
+        y_frame = 3
+    }
 }
 
 move_contact_solid(direction,pm_speed)
-
 
 }
 else if state == "dead"
@@ -229,8 +224,8 @@ image_speed = 0.1
 
 if round(image_index) > 5 && sprite_index == global.spr_player
 {
-deadaf = true;
-sprite_index = spr_empty
+    deadaf = true;
+    sprite_index = spr_empty
 }
 
 if deadaf == true
@@ -257,13 +252,13 @@ if deadaf == true
 }
 else if state == "spawn"
 {
-image_speed = 0;
-timerrespawn -= 1
+    image_speed = 0;
+    timerrespawn -= 1
 
-if timerrespawn < 1
-{
-state = "normal"
-}
+    if timerrespawn < 1
+    {
+        state = "normal"
+    }
 }
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -297,21 +292,18 @@ applies_to=self
 if state == "normal"
 {
 
-if pm_speed != 0
-{
-if x == xprevious && y == yprevious
-{
-anim_speed = 0
-}
-else
-{
-anim_speed = pm_speed * 8
-}
-}
-else if pm_speed = 0
-{
-anim_speed = 0
-}
+    if pm_speed != 0
+    {
+        if x == xprevious && y == yprevious
+        anim_speed = 0
+        else
+        anim_speed = pm_speed * 8
+
+    }
+    else if pm_speed == 0
+    {
+        anim_speed = 0
+    }
 
 }
 #define Draw_0
@@ -326,6 +318,4 @@ draw_sprite_part(global.spr_player,0,floor(x_frame)*tile_width,final_y_frame*til
 x_frame += anim_speed/room_speed;
 if(x_frame >= anim_length) x_frame = initialx_frame;
 
-/*draw_text(x,y-32,speed)
-
-draw_rectangle(x+boxx1,y+boxy1,x+boxx2,y+boxy2,true)
+//draw_text(x,y-32,speed)

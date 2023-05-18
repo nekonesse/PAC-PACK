@@ -32,5 +32,5 @@ scale_progress_bar=1
 show_error_messages=1
 log_errors=0
 always_abort=0
-zero_uninitialized_vars=0
+zero_uninitialized_vars=1
 error_on_uninitialized_args=1

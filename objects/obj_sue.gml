@@ -19,7 +19,7 @@ interval = 24;
 
 state = "normal"
 
-drawing_sprite = global.spr_pinky
+drawing_sprite = global.spr_sue
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
@@ -62,17 +62,9 @@ switch state
         new_direction = -1;
         distance_to_pacman = 99999;
 
-        xdirs[0] = +64;
-        xdirs[1] = 0//-48;
-        xdirs[2] = -64;
-        xdirs[3] = 0;
-        ydirs[0] = 0;
-        ydirs[1] = -64;
-        ydirs[2] = 0;
-        ydirs[3] = +64;
+        targetx = instance_nearest(x,y,obj_pacman).x;
+        targety = instance_nearest(x,y,obj_pacman).y;
 
-        targetx = instance_nearest(x,y,obj_pacman).x + xdirs[instance_nearest(x,y,obj_pacman).direction/90];
-        targety = instance_nearest(x,y,obj_pacman).y + ydirs[instance_nearest(x,y,obj_pacman).direction/90];
 
         if (global.scared) && !(immune)
         {
@@ -98,28 +90,28 @@ switch state
         }
 
         // new scared code
-        listpinky = ds_list_create()
+        listblinky = ds_list_create()
 
         if(!place_meeting(x+ghost_speed,y,obj_wall) && direction != 180)
         {
-            ds_list_add(listpinky,0)
+            ds_list_add(listblinky,0)
         }
         if(!place_meeting(x-ghost_speed,y,obj_wall) && direction != 0)
         {
-            ds_list_add(listpinky,180)
+            ds_list_add(listblinky,180)
         }
         if(!place_meeting(x,y+ghost_speed,obj_wall) && direction != 90)
         {
-            ds_list_add(listpinky,270)
+            ds_list_add(listblinky,270)
         }
         if(!place_meeting(x,y-ghost_speed,obj_wall) && direction != 270)
         {
-            ds_list_add(listpinky,90)
+            ds_list_add(listblinky,90)
         }
 
-        ds_list_shuffle(listpinky)
+        ds_list_shuffle(listblinky)
 
-        new_direction = ds_list_find_value(listpinky, 0);
+        new_direction = ds_list_find_value(listblinky, 0);
 
         if new_direction != -1
         direction = new_direction
@@ -132,11 +124,11 @@ switch state
         case 270: y_frame = 15 break; //Down
         }
 
-        ds_list_clear(listpinky);
-        ds_list_destroy(listpinky);
+        ds_list_clear(listblinky);
+        ds_list_destroy(listblinky);
 
         if (flash_time mod interval) <= interval/2
-        y_frameoffset = 0
+            y_frameoffset = 0
         else
         y_frameoffset = 4
 

@@ -3,9 +3,10 @@
 |obj_ghost
 +Ghosts
 	|obj_blinky
-	|obj_inky
 	|obj_pinky
+	|obj_inky
 	|obj_clyde
+	|obj_sue
 |obj_fruit
 |obj_dot
 |obj_powerdot

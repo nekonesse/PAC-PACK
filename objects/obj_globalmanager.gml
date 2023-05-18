@@ -25,6 +25,7 @@ global.spr_blinky=sprite_add(working_directory+"\assets\blinky.png",0,0,0,0,0)
 global.spr_inky=sprite_add(working_directory+"\assets\inky.png",0,0,0,0,0)
 global.spr_pinky=sprite_add(working_directory+"\assets\pinky.png",0,0,0,0,0)
 global.spr_clyde=sprite_add(working_directory+"\assets\clyde.png",0,0,0,0,0)
+global.spr_sue=sprite_add(working_directory+"\assets\sue.png",0,0,0,0,0)
 
 /*font1big_string = " ABCDEFGHIJKLMNOPQRSTUVWXYZ!'?-:/0123456789."
 font1small_string = " 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!?-./"

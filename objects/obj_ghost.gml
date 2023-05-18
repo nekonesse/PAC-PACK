@@ -237,9 +237,7 @@ if instance_exists(obj_pacman)
 
 //immune prevents ghosts from becoming scared mode again after being eaten
 if obj_globalmanager.timerscared > 355
-{
 immune = false
-}
 
 if state == "normal"
 {
@@ -348,13 +346,13 @@ if instance_exists(obj_pacman)
 {
     if state == "scared"
     {
-    ghost_speed = 1;
-    distance_to_pacman = 9999999;
+        ghost_speed = 1;
+        distance_to_pacman = 9999999;
 
-    if global.scared == false
-    {
-    state = "normal"
-    }
+        if global.scared == false
+        {
+        state = "normal"
+        }
 
     move_wrap(true,true,8)
 
@@ -484,14 +482,14 @@ if instance_exists(obj_pacman)
 
     if new_direction != -1
     {
-    direction = new_direction
-    switch direction
-    {
-    case 0: y_frame = 24 break; //Right
-    case 90: y_frame = 26 break; //Up
-    case 180: y_frame = 25 break;//Left
-    case 270: y_frame = 27 break; //Down
-    }
+        direction = new_direction
+        switch direction
+        {
+        case 0: y_frame = 24 break; //Right
+        case 90: y_frame = 26 break; //Up
+        case 180: y_frame = 25 break;//Left
+        case 270: y_frame = 27 break; //Down
+        }
     }
 
     move_contact_solid(direction,ghost_speed)
@@ -504,7 +502,7 @@ action_id=603
 applies_to=self
 */
 ///Draw Sprite
-draw_sprite_part(drawing_sprite,0,floor(x_frame)*tile_width,final_y_frame*tile_height,tile_width,tile_height,x-16,y-16)
+draw_sprite_part(drawing_sprite,0,floor(x_frame)*tile_width,final_y_frame*tile_height,tile_width,tile_height,round(x)-16,round(y)-16)
 
 //ANIMATE SHEET
 x_frame += anim_speed/room_speed;
@@ -512,4 +510,4 @@ if(x_frame >= anim_length) x_frame = 0;
 
 //debug stuff
 //draw_line(x,y,targetx,targety)
-draw_text(x,y-32,immune)
+//draw_text(x,y-32,immune)
