@@ -19,7 +19,21 @@ interval = 24;
 
 state = "normal"
 
-drawing_sprite = global.spr_blinky
+drawing_sprite = global.spr_funky
+
+/*
+zspeed = 0;
+jumpspeed = -8;
+grav = 0.6;
+z = 0;
+zfloor = 0;
+
+
+tleft = !place_meeting(x-ghost_speed,y, obj_wall) && !place_meeting(x,y+ghost_speed, obj_wall) && !place_meeting(x,y-ghost_speed, obj_wall) && place_meeting(x+ghost_speed,y, obj_wall)
+tright = !place_meeting(x+ghost_speed,y, obj_wall) && !place_meeting(x,y+ghost_speed, obj_wall) && !place_meeting(x,y-ghost_speed, obj_wall) && place_meeting(x-ghost_speed,y, obj_wall)
+tup = !place_meeting(x+ghost_speed,y, obj_wall) && !place_meeting(x,y+ghost_speed, obj_wall) && !place_meeting(x-ghost_speed,y, obj_wall) && place_meeting(x,y-ghost_speed, obj_wall)
+tdown = !place_meeting(x+ghost_speed,y, obj_wall) && !place_meeting(x,y-ghost_speed, obj_wall) && !place_meeting(x-ghost_speed,y, obj_wall) && place_meeting(x,y+ghost_speed, obj_wall)
+quad = !place_meeting(x+ghost_speed,y, obj_wall) && !place_meeting(x,y-ghost_speed, obj_wall) && !place_meeting(x-ghost_speed,y, obj_wall) && !place_meeting(x,y+ghost_speed, obj_wall)
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
@@ -62,13 +76,13 @@ switch state
         new_direction = -1;
         distance_to_pacman = 99999;
 
-        targetx = instance_nearest(x,y,obj_pacman).x;
-        targety = instance_nearest(x,y,obj_pacman).y;
+        targetx = instance_nearest(x,y,obj_dot).x;
+        targety = instance_nearest(x,y,obj_dot).y;
 
         if global.behavior == "scatter" && (instance_number(obj_dot) > 20)
         {
-        targetx = room_width;
-        targety = 0;
+        targetx = room_width/2;
+        targety = room_height/2;
         }
 
 
@@ -219,6 +233,14 @@ if direction != 90
         }
     }
 }
+
+nearestpac = instance_nearest(x,y,obj_pacman)
+
+if !place_meeting(x+ghost_speed,y, obj_wall) && !place_meeting(x,y-ghost_speed, obj_wall) && !place_meeting(x-ghost_speed,y, obj_wall) && !place_meeting(x,y+ghost_speed, obj_wall)
+{
+    new_direction=nearestpac.direction;
+}
+
 }
 
 switch state

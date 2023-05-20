@@ -1,12 +1,14 @@
 |spr_empty
 |spr_ghostspawn
 |spr_wall
+|spr_tunnel
 +Ghosts
 	|spr_blinkyghost
 	|spr_inkyghost
 	|spr_pinkyghost
 	|spr_clydeghost
 	|spr_sueghost
+	|spr_funkyghost
 +Masks
 	|spr_32x32
 	|spr_dotmask

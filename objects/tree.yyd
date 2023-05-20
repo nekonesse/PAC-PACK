@@ -1,5 +1,6 @@
 |obj_globalmanager
 |obj_ghostspawn
+|obj_pacman
 |obj_ghost
 +Ghosts
 	|obj_blinky
@@ -7,10 +8,11 @@
 	|obj_inky
 	|obj_clyde
 	|obj_sue
+	|obj_funky
 |obj_fruit
 |obj_dot
 |obj_powerdot
 |obj_wall
 |obj_ghostwall
-|obj_pacman
+|obj_tunnel
 |object13

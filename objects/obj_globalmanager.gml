@@ -7,13 +7,14 @@ applies_to=self
 global.points = 0
 global.lifepoints = 0
 global.lifes = 3;
-
+global.behavior = "scatter"
 
 global.scared = false
 
 timerscared = 360
 
 //Options
+global.debug=false;
 scoretext = false;
 
 //Loading Resources
@@ -21,11 +22,13 @@ global.spr_player=sprite_add(working_directory+"\assets\pacman.png",0,0,0,0,0)
 global.spr_maze=sprite_add(working_directory+"\assets\maze.png",0,0,0,0,0)
 global.spr_mazeobject=sprite_add(working_directory+"\assets\mazeobjects.png",0,0,0,0,0)
 global.spr_bg=background_add(working_directory+"\assets\background.png",0,0)
+
 global.spr_blinky=sprite_add(working_directory+"\assets\blinky.png",0,0,0,0,0)
 global.spr_inky=sprite_add(working_directory+"\assets\inky.png",0,0,0,0,0)
 global.spr_pinky=sprite_add(working_directory+"\assets\pinky.png",0,0,0,0,0)
 global.spr_clyde=sprite_add(working_directory+"\assets\clyde.png",0,0,0,0,0)
 global.spr_sue=sprite_add(working_directory+"\assets\sue.png",0,0,0,0,0)
+global.spr_funky=sprite_add(working_directory+"\assets\funky.png",0,0,0,0,0)
 
 /*font1big_string = " ABCDEFGHIJKLMNOPQRSTUVWXYZ!'?-:/0123456789."
 font1small_string = " 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!?-./"
@@ -67,21 +70,44 @@ y_frame = 0;
 
 tile_width = 1;
 tile_height = 1;
+#define Alarm_0
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+///Switch to Chase
+global.behavior = "chase"
+if instance_exists(obj_ghost) with(obj_ghost){
+    direction+=180
+}
+alarm[1] = 1200
+#define Alarm_1
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+///Switch to Scatter
+global.behavior = "scatter"
+if instance_exists(obj_ghost) with(obj_ghost){
+    direction+=180
+}
+alarm[0] = 420
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
 applies_to=self
 */
+if keyboard_check_pressed(vk_tab)
+global.debug=!global.debug
+
 if global.scared == true && timerscared > 0
-{
 timerscared -= 1
-}
 
 if timerscared < 1
-{
 global.scared = false;
-}
 #define Draw_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -107,3 +133,4 @@ case 7: draw_sprite(spr_lives,1,0,display_get_gui_height()-32) draw_sprite(spr_l
 case 8: draw_sprite(spr_lives,1,0,display_get_gui_height()-32) draw_sprite(spr_lives,2,32,display_get_gui_height()-32) draw_sprite(spr_lives,2,64,display_get_gui_height()-32) draw_sprite(spr_lives,2,96,display_get_gui_height()-32) draw_sprite(spr_lives,4,128,display_get_gui_height()-32) break;
 case 9: draw_sprite(spr_lives,1,0,display_get_gui_height()-32) draw_sprite(spr_lives,2,32,display_get_gui_height()-32) draw_sprite(spr_lives,2,64,display_get_gui_height()-32) draw_sprite(spr_lives,2,96,display_get_gui_height()-32) draw_sprite(spr_lives,3,128,display_get_gui_height()-32) break;
 }
+*/

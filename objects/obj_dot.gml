@@ -6,8 +6,8 @@ applies_to=self
 */
 ///Animation Values
 
-anim_speed = 12;
-anim_length = 1;
+anim_speed = 6;
+anim_length = 8;
 
 initialx_frame = 0; //use this one instead of x_frame to set the X position of the sprite
 x_frame = initialx_frame;

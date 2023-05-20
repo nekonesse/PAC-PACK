@@ -22,6 +22,9 @@ pm_speed = pm_defaultsp;
 //bugfixing
 immune = false;
 
+offx=4
+offy=0
+
 state = "spawn"
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -80,7 +83,13 @@ if ins != noone
 {
     global.points += 50
     global.lifepoints += 50
-    if instance_exists(obj_ghost) with(obj_ghost){if state == "normal" immune=0 flash_time=120 y_frameoffset=0}
+    if instance_exists(obj_ghost) with(obj_ghost){
+    if state == "normal"
+    immune=0
+    flash_time=120
+    y_frameoffset=0
+    direction+=180
+    }
     //vvvvvv Hi There! Remove these comments if you want the power pellets to spawn a score under it after its eaten vvvvv
     /*insscore = instance_create(x,y,obj_scoreindicator)
     if insscore != noone
@@ -126,7 +135,7 @@ exit
 }
 
 
-insfruit = collision_rectangle(x-boxx1,y-boxy1,x+boxx2,y+boxy2, obj_fruit, false, false);
+insfruit = collision_rectangle(x+boxx1,y+boxy1,x+boxx2,y+boxy2, obj_fruit, false, false);
 if insfruit != noone && z > -4 && insfruit.sprite_index != spr_empty
 {
      insscore = instance_create(obj_fruit.x,obj_fruit.y,obj_scoreindicator)
@@ -146,7 +155,15 @@ if insfruit != noone && z > -4 && insfruit.sprite_index != spr_empty
 exit
 }
 
-col_ghost = instance_position(x,y,obj_ghost)
+switch direction
+{
+case 0: {offx=4 offy=0 break;}
+case 90: {offx=0 offy=-4 break;}
+case 180: {offx=-4 offy=0 break;}
+case 270: {offx=0 offy=4 break;}
+}
+
+col_ghost = instance_position(x+offx,y+offy,obj_ghost)
 if col_ghost != noone
 {
     if col_ghost.state == "scared"
@@ -257,6 +274,7 @@ else if state == "spawn"
 
     if timerrespawn < 1
     {
+        obj_globalmanager.alarm[1] = 420
         state = "normal"
     }
 }
@@ -318,4 +336,10 @@ draw_sprite_part(global.spr_player,0,floor(x_frame)*tile_width,final_y_frame*til
 x_frame += anim_speed/room_speed;
 if(x_frame >= anim_length) x_frame = initialx_frame;
 
-//draw_text(x,y-32,speed)
+if global.debug {
+draw_set_color(c_ltgray)
+draw_rectangle(x+offx,y+offy,(x+offx)+1,(y+offy)+1,false)
+draw_text(x,y+8,instance_number(obj_dot))
+draw_text(x,y-8,global.behavior)
+draw_set_color(c_white)
+}

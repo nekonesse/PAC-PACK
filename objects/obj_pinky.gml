@@ -74,9 +74,14 @@ switch state
         targetx = instance_nearest(x,y,obj_pacman).x + xdirs[instance_nearest(x,y,obj_pacman).direction/90];
         targety = instance_nearest(x,y,obj_pacman).y + ydirs[instance_nearest(x,y,obj_pacman).direction/90];
 
+        if global.behavior == "scatter"
+        {
+        targetx = 0;
+        targety = 0;
+        }
+
         if (global.scared) && !(immune)
         {
-            direction+=180;
             state = "scared";
         }
 
@@ -147,6 +152,7 @@ switch state
         ghost_speed = 4;
         new_direction = -1;
         distance_to_pacman = 9999999;
+        y_frameoffset = 0;
 
         targetx = spawn.x;
         targety = spawn.y;
@@ -256,23 +262,12 @@ case "eaten":
     }
 }
 
+if place_meeting(x,y,obj_tunnel) && state != "eaten"
+{
+ghost_speed=1
+}
+
 move_contact_solid(direction,ghost_speed)
 
 x=round(x)
 y=round(y)
-#define Draw_0
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-///Draw Sprite
-draw_sprite_part(drawing_sprite,0,floor(x_frame)*tile_width,final_y_frame*tile_height,tile_width,tile_height,round(x)-16,round(y)-16)
-
-//ANIMATE SHEET
-x_frame += anim_speed/room_speed;
-if(x_frame >= anim_length) x_frame = 0;
-
-//debug stuff
-if !(state == "scared") draw_line(x,y,targetx,targety)
-draw_text(x,y,immune)
