@@ -29,6 +29,8 @@ global.spr_pinky=sprite_add(working_directory+"\assets\pinky.png",0,0,0,0,0)
 global.spr_clyde=sprite_add(working_directory+"\assets\clyde.png",0,0,0,0,0)
 global.spr_sue=sprite_add(working_directory+"\assets\sue.png",0,0,0,0,0)
 global.spr_funky=sprite_add(working_directory+"\assets\funky.png",0,0,0,0,0)
+global.spr_flicky=sprite_add(working_directory+"\assets\flicky.png",0,0,0,0,0)
+global.spr_tricky=sprite_add(working_directory+"\assets\tricky.png",0,0,0,0,0)
 
 /*font1big_string = " ABCDEFGHIJKLMNOPQRSTUVWXYZ!'?-:/0123456789."
 font1small_string = " 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!?-./"
@@ -78,7 +80,7 @@ applies_to=self
 */
 ///Switch to Chase
 global.behavior = "chase"
-alarm[1] = 1200
+alarm[1] = 1200/2
 #define Alarm_1
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -87,7 +89,7 @@ applies_to=self
 */
 ///Switch to Scatter
 global.behavior = "scatter"
-alarm[0] = 420
+alarm[0] = 420/2
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

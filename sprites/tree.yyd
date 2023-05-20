@@ -9,6 +9,8 @@
 	|spr_clydeghost
 	|spr_sueghost
 	|spr_funkyghost
+	|spr_trickyghost
+	|spr_flickyghost
 +Masks
 	|spr_32x32
 	|spr_dotmask

@@ -52,6 +52,8 @@ applies_to=self
 */
 ///Main Controller
 
+if keyboard_check_pressed(ord("G")) god=!god
+
 if state == "normal"
 {
 final_y_frame = y_frame + y_frameoffset;
@@ -183,7 +185,7 @@ if col_ghost != noone
     }
     else if col_ghost.state == "normal"
     {
-        player_die(id);
+        if !(god) player_die(id);
     }
 }
 
@@ -274,7 +276,7 @@ else if state == "spawn"
 
     if timerrespawn < 1
     {
-        obj_globalmanager.alarm[1] = 1200
+        obj_globalmanager.alarm[0] = 1200/2
         state = "normal"
     }
 }
@@ -331,7 +333,7 @@ action_id=603
 applies_to=self
 */
 //ANIMATE SHEET
-draw_sprite_part(global.spr_player,0,floor(x_frame)*tile_width,final_y_frame*tile_height,tile_width,tile_height,x-16,y-16)
+draw_sprite_part(global.spr_player,0,floor(x_frame)*tile_width,final_y_frame*tile_height,tile_width,tile_height,round(x)-16,round(y)-16)
 
 x_frame += anim_speed/room_speed;
 if(x_frame >= anim_length) x_frame = initialx_frame;
