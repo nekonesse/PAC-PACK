@@ -79,7 +79,7 @@ applies_to=self
 ///Switch to Chase
 global.behavior = "chase"
 if instance_exists(obj_ghost) with(obj_ghost){
-    direction+=180
+    if state == "normal" direction+=180
 }
 alarm[1] = 1200
 #define Alarm_1
@@ -91,7 +91,7 @@ applies_to=self
 ///Switch to Scatter
 global.behavior = "scatter"
 if instance_exists(obj_ghost) with(obj_ghost){
-    direction+=180
+    if state == "normal" direction+=180
 }
 alarm[0] = 420
 #define Step_0

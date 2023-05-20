@@ -83,6 +83,8 @@ if ins != noone
 {
     global.points += 50
     global.lifepoints += 50
+    obj_globalmanager.timerscared = 600
+    global.scared = true
     if instance_exists(obj_ghost) with(obj_ghost){
     if state == "normal"
     immune=0
@@ -99,8 +101,6 @@ if ins != noone
             drawscore = 50
         }
     }*/
-    obj_globalmanager.timerscared = 600
-    global.scared = true
     with(ins)
     {
         instance_destroy()
@@ -274,7 +274,7 @@ else if state == "spawn"
 
     if timerrespawn < 1
     {
-        obj_globalmanager.alarm[1] = 420
+        obj_globalmanager.alarm[1] = 1200
         state = "normal"
     }
 }
